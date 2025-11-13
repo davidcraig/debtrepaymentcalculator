@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { uuid } from "../interfaces/uuid";
-import type { Debt } from "../interfaces/debt";
+import type { Debt, DebtType } from "../interfaces/debt";
 
 interface DebtState {
   debts: Debt[];
@@ -12,8 +12,8 @@ interface DebtState {
 }
 
 const useDebts = create<DebtState>()(
-  persist(
-    (set) => ({
+  persist<DebtState>(
+    (set, get) => ({
       debts: [],
       addDebt: (newDebt) =>
         set((state) => ({ debts: [...state.debts, newDebt] })),
@@ -21,22 +21,13 @@ const useDebts = create<DebtState>()(
         set((state) => ({
           debts: state.debts.filter((debt) => debt.id !== id),
         })),
-      getMaxMonths: () => {
-        const maxMonths = Math.max(
-          ...useDebts
-            .getState()
-            .debts.map((debt) =>
-              Math.ceil(debt.balance / debt.monthlyMinimumPayment),
-            ),
-        );
-        return maxMonths > 0 ? maxMonths : 1;
-      },
-      getTotalBalance: () => {
-        const totalBalance = useDebts
-          .getState()
-          .debts.reduce((acc, debt) => acc + debt.balance, 0);
-        return totalBalance;
-      },
+      getMaxMonths: () =>
+        get().debts.reduce((max, d) => {
+          if (d.monthlyMinimumPayment === 0) return max;
+          const months = Math.ceil(d.balance / d.monthlyMinimumPayment);
+          return Math.max(max, months);
+        }, 0),
+      getTotalBalance: () => get().debts.reduce((sum, d) => sum + d.balance, 0),
     }),
     {
       name: "debts",
