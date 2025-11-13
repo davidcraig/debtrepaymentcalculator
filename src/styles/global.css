@@ -4,7 +4,7 @@
 
 @layer base {
     :root {
-        --primary-color: #3498db;
+        --primary-color: #802020;
         --secondary-color: #e74c3c;
         --text-color: #ececec;
         --background-color: #131313;
@@ -50,5 +50,10 @@
     th,
     td {
         @apply px-4 py-2;
+    }
+
+    h1,
+    h2 {
+        color: var(--secondary-color);
     }
 }

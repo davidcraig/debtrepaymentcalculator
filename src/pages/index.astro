@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import "../styles/global.css";
 import NewDebt from "../components/NewDebt.tsx";
 import DebtList from "../components/DebtList.tsx";
+import DebtSchedule from "../components/DebtSchedule.tsx";
 ---
 
 <Layout>
@@ -13,7 +14,11 @@ import DebtList from "../components/DebtList.tsx";
         </aside>
 
         <main>
+            <h2 class="text-2xl my-4">Debt List</h2>
             <DebtList client:load />
+
+            <h2 class="text-2xl my-4">Debt Schedule</h2>
+            <DebtSchedule client:load />
         </main>
     </div>
 </Layout>
