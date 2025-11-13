@@ -9,9 +9,14 @@ export function DebtSummary() {
       {debts.length > 0 && (
         <div className="debt-summary">
           <h2 className="text-2xl my-4">Debt Summary</h2>
-          It will take {getMaxMonths()} months to pay off all your debts. Your
-          total debt balance is {RenderCurrency(getTotalBalance(), "font-bold")}
-          .
+          <p>
+            It will take <span className="font-bold">{getMaxMonths()}</span>{" "}
+            months to pay off all your debts.
+          </p>
+          <p>
+            Your total debt balance is:{" "}
+            {RenderCurrency(getTotalBalance(), "font-bold")}
+          </p>
         </div>
       )}
     </>
