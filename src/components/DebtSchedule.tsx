@@ -12,7 +12,10 @@ const nextMonth = (date: Date) => {
 let month;
 
 const renderMonthName = (date: Date) => {
-  const options = { month: "long", year: "numeric" };
+  const options: Intl.DateTimeFormatOptions = {
+    month: "long",
+    year: "numeric",
+  };
   return date.toLocaleDateString(undefined, options);
 };
 
