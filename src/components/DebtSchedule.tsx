@@ -46,7 +46,9 @@ function DebtSchedule() {
           const newBalance: number =
             debt.newBalance > 0
               ? debt.newBalance > debt.monthlyMinimumPayment
-                ? (debt.newBalance -= debt.monthlyMinimumPayment)
+                ? parseFloat(
+                    (debt.newBalance -= debt.monthlyMinimumPayment).toFixed(2),
+                  )
                 : (debt.newBalance = 0)
               : 0;
 

@@ -1,6 +1,9 @@
 export function RenderCurrency(value: number) {
+  console.log(value);
   return (
-    <>{value.toLocaleString("en-GB", { style: "currency", currency: "GBP" })}</>
+    <span className={`currency ${value == 0 ? "zero" : "value"}`}>
+      {value.toLocaleString("en-GB", { style: "currency", currency: "GBP" })}
+    </span>
   );
 }
 

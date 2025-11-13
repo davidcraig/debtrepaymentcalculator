@@ -8,6 +8,7 @@
         --secondary-color: #e74c3c;
         --text-color: #ececec;
         --background-color: #131313;
+        --text-zero: #303030;
     }
 
     body {
@@ -54,6 +55,14 @@
 
     h1,
     h2 {
+        color: var(--secondary-color);
+    }
+
+    .zero {
+        color: var(--text-zero);
+    }
+
+    .currency.value {
         color: var(--secondary-color);
     }
 }
